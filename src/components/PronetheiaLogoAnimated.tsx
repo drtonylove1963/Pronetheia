@@ -1,0 +1,171 @@
+import React from 'react';
+
+interface PronetheiaLogoAnimatedProps {
+  width?: number;
+  height?: number;
+  className?: string;
+}
+
+const PronetheiaLogoAnimated: React.FC<PronetheiaLogoAnimatedProps> = ({
+  width = 160,
+  height = 80,
+  className = ''
+}) => {
+  return (
+    <svg 
+      width={width} 
+      height={height} 
+      viewBox="0 0 160 80" 
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <style>
+        {`
+          /* Animations */
+          @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+          }
+          
+          @keyframes dataFlow {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+          }
+          
+          @keyframes agentGlow {
+            0%, 100% { filter: drop-shadow(0 0 2px #F4A261); }
+            50% { filter: drop-shadow(0 0 6px #F4A261); }
+          }
+          
+          @keyframes eyeBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+          }
+          
+          @keyframes irisShift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(2px, -1px); }
+            50% { transform: translate(-1px, 2px); }
+            75% { transform: translate(-2px, -1px); }
+          }
+          
+          .pulse-animation {
+            animation: pulse 2.5s ease-in-out infinite;
+          }
+          
+          .data-flow {
+            stroke-dasharray: 8 4;
+            animation: dataFlow 3s linear infinite;
+          }
+          
+          .agent-glow {
+            animation: agentGlow 3s ease-in-out infinite;
+          }
+          
+          .eye-blink {
+            animation: eyeBlink 6s ease-in-out infinite;
+          }
+          
+          .iris-shift {
+            animation: irisShift 8s ease-in-out infinite;
+          }
+        `}
+      </style>
+      
+      {/* Gradient Definitions */}
+      <defs>
+        <radialGradient id="irisGradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" style={{stopColor: "#F4A261", stopOpacity: 0.3}} />
+          <stop offset="70%" style={{stopColor: "#6B8E7A", stopOpacity: 0.6}} />
+          <stop offset="100%" style={{stopColor: "#1B4B7C", stopOpacity: 0.9}} />
+        </radialGradient>
+        
+        <radialGradient id="socketGradient" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" style={{stopColor: "#8D9AAE", stopOpacity: 0.1}} />
+          <stop offset="100%" style={{stopColor: "#1B4B7C", stopOpacity: 0.3}} />
+        </radialGradient>
+        
+        <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+          <polygon points="0 0, 6 2, 0 4" fill="#8D9AAE" opacity="0.7"/>
+        </marker>
+      </defs>
+      
+      {/* Eye White (Sclera) */}
+      <ellipse cx="80" cy="40" rx="70" ry="35" fill="#ffffff" stroke="#E8E8E8" strokeWidth="1"/>
+      
+      {/* Iris with Agent Ring */}
+      <g className="iris-shift" style={{transformOrigin: '80px 40px'}}>
+        {/* Iris Background */}
+        <circle cx="80" cy="40" r="30" fill="url(#irisGradient)"/>
+        
+        {/* Agent Collaboration Ring */}
+        <circle cx="80" cy="40" r="25" fill="none" stroke="#F4A261" strokeWidth="1" opacity="0.4"/>
+        
+        {/* Specialized Agent Bots */}
+        <g transform="translate(80, 15)" className="agent-glow">
+          {/* Analysis Bot */}
+          <rect x="-3" y="-2" width="6" height="4" fill="#6B8E7A" rx="1"/>
+          <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+          <path d="M-1,-0.5 L1,0.5 M-1,0.5 L1,-0.5" stroke="#1B4B7C" strokeWidth="0.5"/>
+        </g>
+        
+        <g transform="translate(98, 28)" className="agent-glow" style={{animationDelay: '0.5s'}}>
+          {/* Prediction Bot */}
+          <polygon points="0,-2.5 2.5,0 0,2.5 -2.5,0" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+          <line x1="-1.5" y1="0" x2="1.5" y2="0" stroke="#1B4B7C" strokeWidth="0.5"/>
+        </g>
+        
+        <g transform="translate(98, 52)" className="agent-glow" style={{animationDelay: '1s'}}>
+          {/* Decision Bot */}
+          <ellipse cx="0" cy="0" rx="3" ry="2" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+          <line x1="0" y1="-1" x2="0" y2="1" stroke="#1B4B7C" strokeWidth="0.5"/>
+        </g>
+        
+        <g transform="translate(80, 65)" className="agent-glow" style={{animationDelay: '1.5s'}}>
+          {/* Alert Bot */}
+          <rect x="-2" y="-2" width="4" height="4" fill="#6B8E7A" rx="0.5"/>
+          <polygon points="0,-1 1,1 -1,1" fill="#E76F51"/>
+          <circle cx="0" cy="0.5" r="0.5" fill="#F4A261"/>
+        </g>
+        
+        <g transform="translate(62, 52)" className="agent-glow" style={{animationDelay: '2s'}}>
+          {/* Learn Bot */}
+          <polygon points="0,-2 2,0 0,2 -2,0" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+        </g>
+        
+        <g transform="translate(62, 28)" className="agent-glow" style={{animationDelay: '2.5s'}}>
+          {/* Monitor Bot */}
+          <circle cx="0" cy="0" r="2.5" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+          <circle cx="0" cy="0" r="0.5" fill="#1B4B7C"/>
+        </g>
+        
+        {/* Collaboration Flow Lines */}
+        <path d="M80,15 Q89,20 98,28" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowhead)" className="data-flow"/>
+        <path d="M98,28 Q98,40 98,52" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowhead)" className="data-flow" style={{animationDelay: '0.5s'}}/>
+        <path d="M98,52 Q89,58 80,65" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowhead)" className="data-flow" style={{animationDelay: '1s'}}/>
+        <path d="M80,65 Q71,58 62,52" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowhead)" className="data-flow" style={{animationDelay: '1.5s'}}/>
+        <path d="M62,52 Q62,40 62,28" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowhead)" className="data-flow" style={{animationDelay: '2s'}}/>
+        <path d="M62,28 Q71,20 80,15" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowhead)" className="data-flow" style={{animationDelay: '2.5s'}}/>
+      </g>
+      
+      {/* Pupil - Central AI Core */}
+      <circle cx="80" cy="40" r="12" fill="#1B4B7C"/>
+      <circle cx="80" cy="40" r="8" fill="#F4A261" className="pulse-animation"/>
+      
+      {/* Central Processing Indicators */}
+      <circle cx="75" cy="37" r="1" fill="#E76F51" className="pulse-animation"/>
+      <circle cx="85" cy="37" r="1" fill="#E76F51" className="pulse-animation" style={{animationDelay: '0.3s'}}/>
+      <circle cx="80" cy="43" r="1" fill="#E76F51" className="pulse-animation" style={{animationDelay: '0.6s'}}/>
+      
+      {/* Light Reflection */}
+      <ellipse cx="72" cy="32" rx="4" ry="6" fill="#ffffff" opacity="0.7"/>
+      <circle cx="70" cy="30" r="2" fill="#ffffff" opacity="0.9"/>
+    </svg>
+  );
+};
+
+export default PronetheiaLogoAnimated;

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronetheia - Collaborative Agent Ring Eye Logo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1B4B7C;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #F4A261;
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+        
+        .logo-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .logo-version {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-version:hover {
+            transform: translateY(-5px);
+        }
+        
+        .logo-display {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+        
+        .version-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1B4B7C;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .version-description {
+            color: #666;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .version-features {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        /* Eye Logo Styles */
+        .eye-logo {
+            width: 160px;
+            height: 80px;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        @keyframes dataFlow {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+        
+        @keyframes agentGlow {
+            0%, 100% { filter: drop-shadow(0 0 2px #F4A261); }
+            50% { filter: drop-shadow(0 0 6px #F4A261); }
+        }
+        
+        @keyframes eyeBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        
+        @keyframes irisShift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(2px, -1px); }
+            50% { transform: translate(-1px, 2px); }
+            75% { transform: translate(-2px, -1px); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+        
+        .data-flow {
+            stroke-dasharray: 8 4;
+            animation: dataFlow 3s linear infinite;
+        }
+        
+        .agent-glow {
+            animation: agentGlow 3s ease-in-out infinite;
+        }
+        
+        .eye-blink {
+            animation: eyeBlink 6s ease-in-out infinite;
+        }
+        
+        .iris-shift {
+            animation: irisShift 8s ease-in-out infinite;
+        }
+        
+        .size-showcase {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .size-demo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .size-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .usage-guide {
+            background: linear-gradient(135deg, #1B4B7C 0%, #F4A261 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .usage-guide h2 {
+            margin-bottom: 20px;
+            color: #F4A261;
+        }
+        
+        .usage-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .usage-category {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .usage-category h3 {
+            color: #F4A261;
+            margin-bottom: 15px;
+        }
+        
+        .usage-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .usage-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .usage-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #6B8E7A;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .usage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pronetheia Healthcare AI</h1>
+        <p class="subtitle">The Oracle Eye - Collaborative Agent Intelligence</p>
+        
+        <div class="logo-showcase">
+            <!-- Animated Version -->
+            <div class="logo-version">
+                <div class="logo-display">
+                    <svg class="eye-logo" viewBox="0 0 160 80">
+                        <!-- Eye White (Sclera) -->
+                        <ellipse cx="80" cy="40" rx="70" ry="35" fill="#ffffff" stroke="#E8E8E8" stroke-width="1"/>
+                        
+                        <!-- Iris with Agent Ring -->
+                        <g class="iris-shift" style="transform-origin: 80px 40px;">
+                            <!-- Iris Background -->
+                            <circle cx="80" cy="40" r="30" fill="url(#irisGradient)"/>
+                            
+                            <!-- Agent Collaboration Ring -->
+                            <circle cx="80" cy="40" r="25" fill="none" stroke="#F4A261" stroke-width="1" opacity="0.4"/>
+                            
+                            <!-- Specialized Agent Bots -->
+                            <g transform="translate(80, 15)" class="agent-glow">
+                                <!-- Analysis Bot -->
+                                <rect x="-3" y="-2" width="6" height="4" fill="#6B8E7A" rx="1"/>
+                                <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+                                <path d="M-1,-0.5 L1,0.5 M-1,0.5 L1,-0.5" stroke="#1B4B7C" stroke-width="0.5"/>
+                            </g>
+                            
+                            <g transform="translate(98, 28)" class="agent-glow" style="animation-delay: 0.5s">
+                                <!-- Prediction Bot -->
+                                <polygon points="0,-2.5 2.5,0 0,2.5 -2.5,0" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+                                <line x1="-1.5" y1="0" x2="1.5" y2="0" stroke="#1B4B7C" stroke-width="0.5"/>
+                            </g>
+                            
+                            <g transform="translate(98, 52)" class="agent-glow" style="animation-delay: 1s">
+                                <!-- Decision Bot -->
+                                <ellipse cx="0" cy="0" rx="3" ry="2" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+                                <line x1="0" y1="-1" x2="0" y2="1" stroke="#1B4B7C" stroke-width="0.5"/>
+                            </g>
+                            
+                            <g transform="translate(80, 65)" class="agent-glow" style="animation-delay: 1.5s">
+                                <!-- Alert Bot -->
+                                <rect x="-2" y="-2" width="4" height="4" fill="#6B8E7A" rx="0.5"/>
+                                <polygon points="0,-1 1,1 -1,1" fill="#E76F51"/>
+                                <circle cx="0" cy="0.5" r="0.5" fill="#F4A261"/>
+                            </g>
+                            
+                            <g transform="translate(62, 52)" class="agent-glow" style="animation-delay: 2s">
+                                <!-- Learn Bot -->
+                                <polygon points="0,-2 2,0 0,2 -2,0" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+                            </g>
+                            
+                            <g transform="translate(62, 28)" class="agent-glow" style="animation-delay: 2.5s">
+                                <!-- Monitor Bot -->
+                                <circle cx="0" cy="0" r="2.5" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+                                <circle cx="0" cy="0" r="0.5" fill="#1B4B7C"/>
+                            </g>
+                            
+                            <!-- Collaboration Flow Lines -->
+                            <path d="M80,15 Q89,20 98,28" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow"/>
+                            <path d="M98,28 Q98,40 98,52" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 0.5s"/>
+                            <path d="M98,52 Q89,58 80,65" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 1s"/>
+                            <path d="M80,65 Q71,58 62,52" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 1.5s"/>
+                            <path d="M62,52 Q62,40 62,28" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 2s"/>
+                            <path d="M62,28 Q71,20 80,15" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 2.5s"/>
+                        </g>
+                        
+                        <!-- Pupil - Central AI Core -->
+                        <circle cx="80" cy="40" r="12" fill="#1B4B7C"/>
+                        <circle cx="80" cy="40" r="8" fill="#F4A261" class="pulse-animation"/>
+                        
+                        <!-- Central Processing Indicators -->
+                        <circle cx="75" cy="37" r="1" fill="#E76F51" class="pulse-animation"/>
+                        <circle cx="85" cy="37" r="1" fill="#E76F51" class="pulse-animation" style="animation-delay: 0.3s"/>
+                        <circle cx="80" cy="43" r="1" fill="#E76F51" class="pulse-animation" style="animation-delay: 0.6s"/>
+                        
+                        <!-- Light Reflection -->
+                        <ellipse cx="72" cy="32" rx="4" ry="6" fill="#ffffff" opacity="0.7"/>
+                        <circle cx="70" cy="30" r="2" fill="#ffffff" opacity="0.9"/>
+                        
+                        <!-- Gradient Definitions -->
+                        <defs>
+                            <radialGradient id="irisGradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#F4A261;stop-opacity:0.3" />
+                                <stop offset="70%" style="stop-color:#6B8E7A;stop-opacity:0.6" />
+                                <stop offset="100%" style="stop-color:#1B4B7C;stop-opacity:0.9" />
+                            </radialGradient>
+                            
+                            <radialGradient id="socketGradient" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" style="stop-color:#8D9AAE;stop-opacity:0.1" />
+                                <stop offset="100%" style="stop-color:#1B4B7C;stop-opacity:0.3" />
+                            </radialGradient>
+                            
+                            <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+                                <polygon points="0 0, 6 2, 0 4" fill="#8D9AAE" opacity="0.7"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="version-title">🎬 Animated Version</div>
+                <div class="version-description">Dynamic collaborative AI agents with realistic eye movements and blinking</div>
+                <div class="version-features">
+                    <strong>Perfect for:</strong><br>
+                    • Website headers and digital interfaces<br>
+                    • Software loading screens<br>
+                    • Presentation slides<br>
+                    • Digital marketing materials<br>
+                    • Healthcare app interfaces<br>
+                    • Video intros and outros
+                </div>
+            </div>
+            
+            <!-- Static Version -->
+            <div class="logo-version">
+                <div class="logo-display">
+                    <svg class="eye-logo" viewBox="0 0 200 140">
+                        <!-- Eye White (Sclera) -->
+                        <ellipse cx="100" cy="70" rx="70" ry="35" fill="#ffffff" stroke="#E8E8E8" stroke-width="1"/>
+                        
+                        <!-- Iris with Agent Ring -->
+                        <g>
+                            <!-- Iris Background -->
+                            <circle cx="100" cy="70" r="30" fill="url(#irisGradientStatic)"/>
+                            
+                            <!-- Agent Collaboration Ring -->
+                            <circle cx="100" cy="70" r="25" fill="none" stroke="#F4A261" stroke-width="1" opacity="0.6"/>
+                            
+                            <!-- Specialized Agent Bots - Static Positions -->
+                            <g transform="translate(100, 45)">
+                                <!-- Analysis Bot -->
+                                <rect x="-3" y="-2" width="6" height="4" fill="#6B8E7A" rx="1"/>
+                                <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+                                <path d="M-1,-0.5 L1,0.5 M-1,0.5 L1,-0.5" stroke="#1B4B7C" stroke-width="0.5"/>
+                                <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">ANALYZE</text>
+                            </g>
+                            
+                            <g transform="translate(118, 58)">
+                                <!-- Prediction Bot -->
+                                <polygon points="0,-2.5 2.5,0 0,2.5 -2.5,0" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+                                <line x1="-1.5" y1="0" x2="1.5" y2="0" stroke="#1B4B7C" stroke-width="0.5"/>
+                                <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">PREDICT</text>
+                            </g>
+                            
+                            <g transform="translate(118, 82)">
+                                <!-- Decision Bot -->
+                                <ellipse cx="0" cy="0" rx="3" ry="2" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+                                <line x1="0" y1="-1" x2="0" y2="1" stroke="#1B4B7C" stroke-width="0.5"/>
+                                <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">DECIDE</text>
+                            </g>
+                            
+                            <g transform="translate(100, 95)">
+                                <!-- Alert Bot -->
+                                <rect x="-2" y="-2" width="4" height="4" fill="#6B8E7A" rx="0.5"/>
+                                <polygon points="0,-1 1,1 -1,1" fill="#E76F51"/>
+                                <circle cx="0" cy="0.5" r="0.5" fill="#F4A261"/>
+                                <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">ALERT</text>
+                            </g>
+                            
+                            <g transform="translate(82, 82)">
+                                <!-- Learn Bot -->
+                                <polygon points="0,-2 2,0 0,2 -2,0" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+                                <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">LEARN</text>
+                            </g>
+                            
+                            <g transform="translate(82, 58)">
+                                <!-- Monitor Bot -->
+                                <circle cx="0" cy="0" r="2.5" fill="#6B8E7A"/>
+                                <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+                                <circle cx="0" cy="0" r="0.5" fill="#1B4B7C"/>
+                                <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">WATCH</text>
+                            </g>
+                            
+                            <!-- Collaboration Flow Lines - Static -->
+                            <path d="M100,45 Q109,50 118,58" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+                            <path d="M118,58 Q118,70 118,82" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+                            <path d="M118,82 Q109,88 100,95" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+                            <path d="M100,95 Q91,88 82,82" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+                            <path d="M82,82 Q82,70 82,58" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+                            <path d="M82,58 Q91,50 100,45" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+                        </g>
+                        
+                        <!-- Pupil - Central AI Core -->
+                        <circle cx="100" cy="70" r="12" fill="#1B4B7C"/>
+                        <circle cx="100" cy="70" r="8" fill="#F4A261"/>
+                        
+                        <!-- Central Processing Indicators -->
+                        <circle cx="95" cy="67" r="1" fill="#E76F51"/>
+                        <circle cx="105" cy="67" r="1" fill="#E76F51"/>
+                        <circle cx="100" cy="73" r="1" fill="#E76F51"/>
+                        
+                        <!-- Light Reflection -->
+                        <ellipse cx="92" cy="62" rx="4" ry="6" fill="#ffffff" opacity="0.7"/>
+                        <circle cx="90" cy="60" r="2" fill="#ffffff" opacity="0.9"/>
+                        
+                        <!-- Gradient Definitions -->
+                        <defs>
+                            <radialGradient id="irisGradientStatic" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#F4A261;stop-opacity:0.3" />
+                                <stop offset="70%" style="stop-color:#6B8E7A;stop-opacity:0.6" />
+                                <stop offset="100%" style="stop-color:#1B4B7C;stop-opacity:0.9" />
+                            </radialGradient>
+                            
+                            <radialGradient id="socketGradientStatic" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" style="stop-color:#8D9AAE;stop-opacity:0.1" />
+                                <stop offset="100%" style="stop-color:#1B4B7C;stop-opacity:0.3" />
+                            </radialGradient>
+                            
+                            <marker id="arrowheadStatic" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+                                <polygon points="0 0, 6 2, 0 4" fill="#8D9AAE"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="version-title">📄 Static Version</div>
+                <div class="version-description">Clean, professional eye design with labeled agent functions for print and static applications</div>
+                <div class="version-features">
+                    <strong>Perfect for:</strong><br>
+                    • Business cards and letterhead<br>
+                    • Medical forms and documents<br>
+                    • Embroidered items (lab coats, uniforms)<br>
+                    • Printed marketing materials<br>
+                    • Favicon and small icons<br>
+                    • Professional presentations
+                </div>
+            </div>
+        </div>
+        
+        <!-- Size Showcase -->
+        <div class="size-showcase">
+            <h2 style="text-align: center; color: #1B4B7C; margin-bottom: 30px;">Logo Scalability Test</h2>
+            <div class="size-grid">
+                <div class="size-demo">
+                    <div class="size-label">Favicon (16px)</div>
+                    <svg width="16" height="8" viewBox="0 0 160 80">
+                        <ellipse cx="80" cy="40" rx="70" ry="35" fill="#ffffff" stroke="#1B4B7C" stroke-width="3"/>
+                        <circle cx="80" cy="40" r="30" fill="url(#irisGradientStatic)"/>
+                        <circle cx="80" cy="40" r="12" fill="#1B4B7C"/>
+                        <circle cx="80" cy="40" r="8" fill="#F4A261"/>
+                    </svg>
+                </div>
+                
+                <div class="size-demo">
+                    <div class="size-label">Small Icon (32px)</div>
+                    <svg width="32" height="16" viewBox="0 0 160 80">
+                        <ellipse cx="80" cy="40" rx="70" ry="35" fill="#ffffff" stroke="#1B4B7C" stroke-width="2"/>
+                        <circle cx="80" cy="40" r="30" fill="url(#irisGradientStatic)"/>
+                        <circle cx="80" cy="40" r="12" fill="#1B4B7C"/>
+                        <circle cx="80" cy="40" r="8" fill="#F4A261"/>
+                    </svg>
+                </div>
+                
+                <div class="size-demo">
+                    <div class="size-label">Medium (64px)</div>
+                    <svg width="64" height="32" viewBox="0 0 160 80">
+                        <ellipse cx="80" cy="40" rx="70" ry="35" fill="#ffffff" stroke="#1B4B7C" stroke-width="2"/>
+                        <circle cx="80" cy="40" r="30" fill="url(#irisGradientStatic)"/>
+                        <circle cx="80" cy="40" r="25" fill="none" stroke="#F4A261" stroke-width="1"/>
+                        <circle cx="80" cy="40" r="12" fill="#1B4B7C"/>
+                        <circle cx="80" cy="40" r="8" fill="#F4A261"/>
+                    </svg>
+                </div>
+                
+                <div class="size-demo">
+                    <div class="size-label">Large (128px)</div>
+                    <svg width="128" height="64" viewBox="0 0 160 80">
+                        <ellipse cx="80" cy="40" rx="70" ry="35" fill="#ffffff" stroke="#1B4B7C" stroke-width="2"/>
+                        <circle cx="80" cy="40" r="30" fill="url(#irisGradientStatic)"/>
+                        <circle cx="80" cy="40" r="25" fill="none" stroke="#F4A261" stroke-width="1"/>
+                        <rect x="77" y="13" width="6" height="4" fill="#6B8E7A" rx="1"/>
+                        <polygon points="98,-2.5 100.5,0 98,2.5 95.5,0" fill="#6B8E7A" transform="translate(0,28)"/>
+                        <circle cx="80" cy="40" r="12" fill="#1B4B7C"/>
+                        <circle cx="80" cy="40" r="8" fill="#F4A261"/>
+                        <ellipse cx="72" cy="32" rx="4" ry="6" fill="#ffffff" opacity="0.7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Usage Guide -->
+        <div class="usage-guide">
+            <h2>Logo Implementation Guide</h2>
+            <p>The Pronetheia Oracle Eye adapts perfectly to both digital and print environments while maintaining the collaborative AI agent concept at every size.</p>
+            
+            <div class="usage-grid">
+                <div class="usage-category">
+                    <h3>🎬 Animated Applications</h3>
+                    <ul class="usage-list">
+                        <li>Website headers and navigation</li>
+                        <li>Healthcare software interfaces</li>
+                        <li>Loading screens and progress indicators</li>
+                        <li>Digital presentations and demos</li>
+                        <li>Social media and video content</li>
+                        <li>Interactive kiosks and displays</li>
+                        <li>Mobile app splash screens</li>
+                    </ul>
+                </div>
+                
+                <div class="usage-category">
+                    <h3>📄 Static Applications</h3>
+                    <ul class="usage-list">
+                        <li>Business cards and letterhead</li>
+                        <li>Medical forms and documentation</li>
+                        <li>Print advertisements and brochures</li>
+                        <li>Embroidered uniforms and lab coats</li>
+                        <li>Vehicle graphics and signage</li>
+                        <li>Conference banners and displays</li>
+                        <li>Professional certifications</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <h3 style="color: #F4A261; margin-bottom: 15px;">🎯 Brand Message</h3>
+                <p>The Oracle Eye represents healthcare foresight through collaborative AI intelligence. The human eye symbolizes trust, observation, and care, while the agent ring demonstrates how multiple AI systems work together to provide comprehensive healthcare insights. It's both cutting-edge technology and deeply human-centered design.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

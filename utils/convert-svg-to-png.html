@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG to PNG Converter - Pronetheia Logos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .converter-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo-preview {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .size-option {
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .size-option:hover {
+            border-color: #F4A261;
+            background: #fef8f1;
+        }
+        
+        .download-btn {
+            background: #1B4B7C;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: #F4A261;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1B4B7C;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pronetheia Logo PNG Generator</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li>Choose the logo version (Animated or Static)</li>
+            <li>Select the desired size</li>
+            <li>Click "Download PNG" to generate and download the image</li>
+            <li>The PNG will be downloaded with transparent background</li>
+        </ol>
+    </div>
+
+    <!-- Animated Logo Section -->
+    <div class="converter-section">
+        <h2>Animated Logo (Best for Digital Use)</h2>
+        <div class="logo-preview">
+            <div id="animated-logo-container"></div>
+        </div>
+        
+        <div class="size-grid">
+            <div class="size-option" onclick="downloadPNG('animated', 32, 16, 'favicon')">
+                <h4>Favicon (32×16)</h4>
+                <p>For browser tabs and bookmarks</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('animated', 64, 32, 'icon-small')">
+                <h4>Small Icon (64×32)</h4>
+                <p>For app icons and small displays</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('animated', 160, 80, 'standard')">
+                <h4>Standard (160×80)</h4>
+                <p>For website headers and UI</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('animated', 320, 160, 'large')">
+                <h4>Large (320×160)</h4>
+                <p>For presentations and banners</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('animated', 640, 320, 'extra-large')">
+                <h4>Extra Large (640×320)</h4>
+                <p>For print and high-resolution displays</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Static Logo Section -->
+    <div class="converter-section">
+        <h2>Static Logo (Best for Print Use)</h2>
+        <div class="logo-preview">
+            <div id="static-logo-container"></div>
+        </div>
+        
+        <div class="size-grid">
+            <div class="size-option" onclick="downloadPNG('static', 40, 28, 'favicon')">
+                <h4>Favicon (40×28)</h4>
+                <p>For browser tabs and bookmarks</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('static', 80, 56, 'icon-small')">
+                <h4>Small Icon (80×56)</h4>
+                <p>For app icons and small displays</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('static', 200, 140, 'standard')">
+                <h4>Standard (200×140)</h4>
+                <p>For documents and forms</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('static', 400, 280, 'large')">
+                <h4>Large (400×280)</h4>
+                <p>For presentations and marketing</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+            
+            <div class="size-option" onclick="downloadPNG('static', 800, 560, 'extra-large')">
+                <h4>Extra Large (800×560)</h4>
+                <p>For print and high-resolution</p>
+                <button class="download-btn">Download PNG</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load and display the SVG logos
+        function loadLogos() {
+            // Animated logo SVG content
+            const animatedSVG = `<svg viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg" width="160" height="80">
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    @keyframes dataFlow {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes agentGlow {
+      0%, 100% { filter: drop-shadow(0 0 2px #F4A261); }
+      50% { filter: drop-shadow(0 0 6px #F4A261); }
+    }
+    @keyframes irisShift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(2px, -1px); }
+      50% { transform: translate(-1px, 2px); }
+      75% { transform: translate(-2px, -1px); }
+    }
+    .pulse-animation { animation: pulse 2.5s ease-in-out infinite; }
+    .data-flow { stroke-dasharray: 8 4; animation: dataFlow 3s linear infinite; }
+    .agent-glow { animation: agentGlow 3s ease-in-out infinite; }
+    .iris-shift { animation: irisShift 8s ease-in-out infinite; }
+  </style>
+  <defs>
+    <radialGradient id="irisGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#F4A261;stop-opacity:0.3" />
+      <stop offset="70%" style="stop-color:#6B8E7A;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#1B4B7C;stop-opacity:0.9" />
+    </radialGradient>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#8D9AAE" opacity="0.7"/>
+    </marker>
+  </defs>
+  <ellipse cx="80" cy="40" rx="70" ry="35" fill="#ffffff" stroke="#E8E8E8" stroke-width="1"/>
+  <g class="iris-shift" style="transform-origin: 80px 40px;">
+    <circle cx="80" cy="40" r="30" fill="url(#irisGradient)"/>
+    <circle cx="80" cy="40" r="25" fill="none" stroke="#F4A261" stroke-width="1" opacity="0.4"/>
+    <g transform="translate(80, 15)" class="agent-glow">
+      <rect x="-3" y="-2" width="6" height="4" fill="#6B8E7A" rx="1"/>
+      <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+      <path d="M-1,-0.5 L1,0.5 M-1,0.5 L1,-0.5" stroke="#1B4B7C" stroke-width="0.5"/>
+    </g>
+    <g transform="translate(98, 28)" class="agent-glow" style="animation-delay: 0.5s">
+      <polygon points="0,-2.5 2.5,0 0,2.5 -2.5,0" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+      <line x1="-1.5" y1="0" x2="1.5" y2="0" stroke="#1B4B7C" stroke-width="0.5"/>
+    </g>
+    <g transform="translate(98, 52)" class="agent-glow" style="animation-delay: 1s">
+      <ellipse cx="0" cy="0" rx="3" ry="2" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+      <line x1="0" y1="-1" x2="0" y2="1" stroke="#1B4B7C" stroke-width="0.5"/>
+    </g>
+    <g transform="translate(80, 65)" class="agent-glow" style="animation-delay: 1.5s">
+      <rect x="-2" y="-2" width="4" height="4" fill="#6B8E7A" rx="0.5"/>
+      <polygon points="0,-1 1,1 -1,1" fill="#E76F51"/>
+      <circle cx="0" cy="0.5" r="0.5" fill="#F4A261"/>
+    </g>
+    <g transform="translate(62, 52)" class="agent-glow" style="animation-delay: 2s">
+      <polygon points="0,-2 2,0 0,2 -2,0" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+    </g>
+    <g transform="translate(62, 28)" class="agent-glow" style="animation-delay: 2.5s">
+      <circle cx="0" cy="0" r="2.5" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+      <circle cx="0" cy="0" r="0.5" fill="#1B4B7C"/>
+    </g>
+    <path d="M80,15 Q89,20 98,28" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow"/>
+    <path d="M98,28 Q98,40 98,52" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 0.5s"/>
+    <path d="M98,52 Q89,58 80,65" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 1s"/>
+    <path d="M80,65 Q71,58 62,52" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 1.5s"/>
+    <path d="M62,52 Q62,40 62,28" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 2s"/>
+    <path d="M62,28 Q71,20 80,15" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowhead)" class="data-flow" style="animation-delay: 2.5s"/>
+  </g>
+  <circle cx="80" cy="40" r="12" fill="#1B4B7C"/>
+  <circle cx="80" cy="40" r="8" fill="#F4A261" class="pulse-animation"/>
+  <circle cx="75" cy="37" r="1" fill="#E76F51" class="pulse-animation"/>
+  <circle cx="85" cy="37" r="1" fill="#E76F51" class="pulse-animation" style="animation-delay: 0.3s"/>
+  <circle cx="80" cy="43" r="1" fill="#E76F51" class="pulse-animation" style="animation-delay: 0.6s"/>
+  <ellipse cx="72" cy="32" rx="4" ry="6" fill="#ffffff" opacity="0.7"/>
+  <circle cx="70" cy="30" r="2" fill="#ffffff" opacity="0.9"/>
+</svg>`;
+
+            // Static logo SVG content
+            const staticSVG = `<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" width="200" height="140">
+  <defs>
+    <radialGradient id="irisGradientStatic" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#F4A261;stop-opacity:0.3" />
+      <stop offset="70%" style="stop-color:#6B8E7A;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#1B4B7C;stop-opacity:0.9" />
+    </radialGradient>
+    <marker id="arrowheadStatic" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#8D9AAE"/>
+    </marker>
+  </defs>
+  <ellipse cx="100" cy="70" rx="70" ry="35" fill="#ffffff" stroke="#E8E8E8" stroke-width="1"/>
+  <g>
+    <circle cx="100" cy="70" r="30" fill="url(#irisGradientStatic)"/>
+    <circle cx="100" cy="70" r="25" fill="none" stroke="#F4A261" stroke-width="1" opacity="0.6"/>
+    <g transform="translate(100, 45)">
+      <rect x="-3" y="-2" width="6" height="4" fill="#6B8E7A" rx="1"/>
+      <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+      <path d="M-1,-0.5 L1,0.5 M-1,0.5 L1,-0.5" stroke="#1B4B7C" stroke-width="0.5"/>
+      <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">ANALYZE</text>
+    </g>
+    <g transform="translate(118, 58)">
+      <polygon points="0,-2.5 2.5,0 0,2.5 -2.5,0" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+      <line x1="-1.5" y1="0" x2="1.5" y2="0" stroke="#1B4B7C" stroke-width="0.5"/>
+      <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">PREDICT</text>
+    </g>
+    <g transform="translate(118, 82)">
+      <ellipse cx="0" cy="0" rx="3" ry="2" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+      <line x1="0" y1="-1" x2="0" y2="1" stroke="#1B4B7C" stroke-width="0.5"/>
+      <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">DECIDE</text>
+    </g>
+    <g transform="translate(100, 95)">
+      <rect x="-2" y="-2" width="4" height="4" fill="#6B8E7A" rx="0.5"/>
+      <polygon points="0,-1 1,1 -1,1" fill="#E76F51"/>
+      <circle cx="0" cy="0.5" r="0.5" fill="#F4A261"/>
+      <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">ALERT</text>
+    </g>
+    <g transform="translate(82, 82)">
+      <polygon points="0,-2 2,0 0,2 -2,0" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+      <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">LEARN</text>
+    </g>
+    <g transform="translate(82, 58)">
+      <circle cx="0" cy="0" r="2.5" fill="#6B8E7A"/>
+      <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+      <circle cx="0" cy="0" r="0.5" fill="#1B4B7C"/>
+      <text x="0" y="8" font-family="monospace" font-size="4" fill="#1B4B7C" text-anchor="middle">WATCH</text>
+    </g>
+    <path d="M100,45 Q109,50 118,58" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+    <path d="M118,58 Q118,70 118,82" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+    <path d="M118,82 Q109,88 100,95" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+    <path d="M100,95 Q91,88 82,82" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+    <path d="M82,82 Q82,70 82,58" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+    <path d="M82,58 Q91,50 100,45" fill="none" stroke="#8D9AAE" stroke-width="1" marker-end="url(#arrowheadStatic)" opacity="0.7"/>
+  </g>
+  <circle cx="100" cy="70" r="12" fill="#1B4B7C"/>
+  <circle cx="100" cy="70" r="8" fill="#F4A261"/>
+  <circle cx="95" cy="67" r="1" fill="#E76F51"/>
+  <circle cx="105" cy="67" r="1" fill="#E76F51"/>
+  <circle cx="100" cy="73" r="1" fill="#E76F51"/>
+  <ellipse cx="92" cy="62" rx="4" ry="6" fill="#ffffff" opacity="0.7"/>
+  <circle cx="90" cy="60" r="2" fill="#ffffff" opacity="0.9"/>
+</svg>`;
+
+            document.getElementById('animated-logo-container').innerHTML = animatedSVG;
+            document.getElementById('static-logo-container').innerHTML = staticSVG;
+        }
+
+        function downloadPNG(type, width, height, sizeName) {
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+
+            // Get SVG content
+            const svgContainer = type === 'animated' ? 
+                document.getElementById('animated-logo-container') : 
+                document.getElementById('static-logo-container');
+            
+            const svgElement = svgContainer.querySelector('svg');
+            const svgData = new XMLSerializer().serializeToString(svgElement);
+            
+            // Create temporary SVG with correct dimensions
+            const tempSVG = svgData.replace(/width="[^"]*"/, `width="${width}"`)
+                                  .replace(/height="[^"]*"/, `height="${height}"`);
+            
+            // Create image from SVG
+            const img = new Image();
+            const svgBlob = new Blob([tempSVG], {type: 'image/svg+xml;charset=utf-8'});
+            const url = URL.createObjectURL(svgBlob);
+            
+            img.onload = function() {
+                // Clear canvas with transparent background
+                ctx.clearRect(0, 0, width, height);
+                
+                // Draw image
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                // Convert to PNG and download
+                canvas.toBlob(function(blob) {
+                    const link = document.createElement('a');
+                    link.download = `pronetheia-logo-${type}-${sizeName}-${width}x${height}.png`;
+                    link.href = URL.createObjectURL(blob);
+                    link.click();
+                    
+                    // Cleanup
+                    URL.revokeObjectURL(url);
+                    URL.revokeObjectURL(link.href);
+                }, 'image/png');
+            };
+            
+            img.src = url;
+        }
+
+        // Load logos when page loads
+        document.addEventListener('DOMContentLoaded', loadLogos);
+    </script>
+</body>
+</html>

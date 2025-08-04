@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: PronetheiaDB2024!
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - pronetheia-network
+
+  api:
+    build:
+      context: ./backend/Pronetheia.Api
+      dockerfile: Dockerfile
+    ports:
+      - "6789:80"
+    depends_on:
+      - sqlserver
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=PronetheiaDB;User=sa;Password=PronetheiaDB2024!;TrustServerCertificate=true;
+      - OpenRouter__ApiKey=${OPENROUTER_API_KEY}
+      - Jwt__Key=PronetheiaSecretKeyThatIsAtLeast32CharactersLong!@#$%
+      - Jwt__Issuer=Pronetheia.Api
+      - Jwt__Audience=Pronetheia.Client
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - pronetheia-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    environment:
+      - VITE_API_URL=http://localhost:6789/api
+    networks:
+      - pronetheia-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  pronetheia-network:
+    driver: bridge

@@ -1,0 +1,150 @@
+import React from 'react';
+
+interface PronetheiaLogoStaticProps {
+  width?: number;
+  height?: number;
+  className?: string;
+  showLabels?: boolean;
+}
+
+const PronetheiaLogoStatic: React.FC<PronetheiaLogoStaticProps> = ({
+  width = 200,
+  height = 140,
+  className = '',
+  showLabels = true
+}) => {
+  return (
+    <svg 
+      width={width} 
+      height={height} 
+      viewBox="0 0 200 140" 
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      {/* Gradient Definitions */}
+      <defs>
+        <radialGradient id="irisGradientStatic" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" style={{stopColor: "#F4A261", stopOpacity: 0.3}} />
+          <stop offset="70%" style={{stopColor: "#6B8E7A", stopOpacity: 0.6}} />
+          <stop offset="100%" style={{stopColor: "#1B4B7C", stopOpacity: 0.9}} />
+        </radialGradient>
+        
+        <radialGradient id="socketGradientStatic" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" style={{stopColor: "#8D9AAE", stopOpacity: 0.1}} />
+          <stop offset="100%" style={{stopColor: "#1B4B7C", stopOpacity: 0.3}} />
+        </radialGradient>
+        
+        <marker id="arrowheadStatic" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+          <polygon points="0 0, 6 2, 0 4" fill="#8D9AAE"/>
+        </marker>
+      </defs>
+      
+      {/* Eye White (Sclera) */}
+      <ellipse cx="100" cy="70" rx="70" ry="35" fill="#ffffff" stroke="#E8E8E8" strokeWidth="1"/>
+      
+      {/* Iris with Agent Ring */}
+      <g>
+        {/* Iris Background */}
+        <circle cx="100" cy="70" r="30" fill="url(#irisGradientStatic)"/>
+        
+        {/* Agent Collaboration Ring */}
+        <circle cx="100" cy="70" r="25" fill="none" stroke="#F4A261" strokeWidth="1" opacity="0.6"/>
+        
+        {/* Specialized Agent Bots - Static Positions */}
+        <g transform="translate(100, 45)">
+          {/* Analysis Bot */}
+          <rect x="-3" y="-2" width="6" height="4" fill="#6B8E7A" rx="1"/>
+          <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+          <path d="M-1,-0.5 L1,0.5 M-1,0.5 L1,-0.5" stroke="#1B4B7C" strokeWidth="0.5"/>
+          {showLabels && (
+            <text x="0" y="8" fontFamily="monospace" fontSize="4" fill="#1B4B7C" textAnchor="middle">
+              ANALYZE
+            </text>
+          )}
+        </g>
+        
+        <g transform="translate(118, 58)">
+          {/* Prediction Bot */}
+          <polygon points="0,-2.5 2.5,0 0,2.5 -2.5,0" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+          <line x1="-1.5" y1="0" x2="1.5" y2="0" stroke="#1B4B7C" strokeWidth="0.5"/>
+          {showLabels && (
+            <text x="0" y="8" fontFamily="monospace" fontSize="4" fill="#1B4B7C" textAnchor="middle">
+              PREDICT
+            </text>
+          )}
+        </g>
+        
+        <g transform="translate(118, 82)">
+          {/* Decision Bot */}
+          <ellipse cx="0" cy="0" rx="3" ry="2" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+          <line x1="0" y1="-1" x2="0" y2="1" stroke="#1B4B7C" strokeWidth="0.5"/>
+          {showLabels && (
+            <text x="0" y="8" fontFamily="monospace" fontSize="4" fill="#1B4B7C" textAnchor="middle">
+              DECIDE
+            </text>
+          )}
+        </g>
+        
+        <g transform="translate(100, 95)">
+          {/* Alert Bot */}
+          <rect x="-2" y="-2" width="4" height="4" fill="#6B8E7A" rx="0.5"/>
+          <polygon points="0,-1 1,1 -1,1" fill="#E76F51"/>
+          <circle cx="0" cy="0.5" r="0.5" fill="#F4A261"/>
+          {showLabels && (
+            <text x="0" y="8" fontFamily="monospace" fontSize="4" fill="#1B4B7C" textAnchor="middle">
+              ALERT
+            </text>
+          )}
+        </g>
+        
+        <g transform="translate(82, 82)">
+          {/* Learn Bot */}
+          <polygon points="0,-2 2,0 0,2 -2,0" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1" fill="#F4A261"/>
+          {showLabels && (
+            <text x="0" y="8" fontFamily="monospace" fontSize="4" fill="#1B4B7C" textAnchor="middle">
+              LEARN
+            </text>
+          )}
+        </g>
+        
+        <g transform="translate(82, 58)">
+          {/* Monitor Bot */}
+          <circle cx="0" cy="0" r="2.5" fill="#6B8E7A"/>
+          <circle cx="0" cy="0" r="1.5" fill="#F4A261"/>
+          <circle cx="0" cy="0" r="0.5" fill="#1B4B7C"/>
+          {showLabels && (
+            <text x="0" y="8" fontFamily="monospace" fontSize="4" fill="#1B4B7C" textAnchor="middle">
+              WATCH
+            </text>
+          )}
+        </g>
+        
+        {/* Collaboration Flow Lines - Static */}
+        <path d="M100,45 Q109,50 118,58" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowheadStatic)" opacity="0.7"/>
+        <path d="M118,58 Q118,70 118,82" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowheadStatic)" opacity="0.7"/>
+        <path d="M118,82 Q109,88 100,95" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowheadStatic)" opacity="0.7"/>
+        <path d="M100,95 Q91,88 82,82" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowheadStatic)" opacity="0.7"/>
+        <path d="M82,82 Q82,70 82,58" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowheadStatic)" opacity="0.7"/>
+        <path d="M82,58 Q91,50 100,45" fill="none" stroke="#8D9AAE" strokeWidth="1" markerEnd="url(#arrowheadStatic)" opacity="0.7"/>
+      </g>
+      
+      {/* Pupil - Central AI Core */}
+      <circle cx="100" cy="70" r="12" fill="#1B4B7C"/>
+      <circle cx="100" cy="70" r="8" fill="#F4A261"/>
+      
+      {/* Central Processing Indicators */}
+      <circle cx="95" cy="67" r="1" fill="#E76F51"/>
+      <circle cx="105" cy="67" r="1" fill="#E76F51"/>
+      <circle cx="100" cy="73" r="1" fill="#E76F51"/>
+      
+      {/* Light Reflection */}
+      <ellipse cx="92" cy="62" rx="4" ry="6" fill="#ffffff" opacity="0.7"/>
+      <circle cx="90" cy="60" r="2" fill="#ffffff" opacity="0.9"/>
+    </svg>
+  );
+};
+
+export default PronetheiaLogoStatic;
