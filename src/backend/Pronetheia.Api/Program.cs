@@ -115,6 +115,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ChatAgent>();
 builder.Services.AddScoped<EvolutionAgent>();
 builder.Services.AddScoped<ToolAgent>();
+builder.Services.AddScoped<ProjectManagementAgent>(); // ✨ First Evolved Agent - Created by EvolutionAgent Phase 0.3
 
 // Register MCP Tools
 builder.Services.AddScoped<FileOperationsMCP>();

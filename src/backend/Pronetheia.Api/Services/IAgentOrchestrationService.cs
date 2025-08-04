@@ -19,6 +19,7 @@ public class AgentOrchestrationService : IAgentOrchestrationService
     private readonly ChatAgent _chatAgent;
     private readonly EvolutionAgent _evolutionAgent;
     private readonly ToolAgent _toolAgent;
+    private readonly ProjectManagementAgent _projectManagementAgent;
     private readonly IServiceProvider _serviceProvider;
 
     public AgentOrchestrationService(
@@ -27,6 +28,7 @@ public class AgentOrchestrationService : IAgentOrchestrationService
         ChatAgent chatAgent,
         EvolutionAgent evolutionAgent,
         ToolAgent toolAgent,
+        ProjectManagementAgent projectManagementAgent,
         IServiceProvider serviceProvider)
     {
         _communicationHub = communicationHub;
@@ -34,6 +36,7 @@ public class AgentOrchestrationService : IAgentOrchestrationService
         _chatAgent = chatAgent;
         _evolutionAgent = evolutionAgent;
         _toolAgent = toolAgent;
+        _projectManagementAgent = projectManagementAgent;
         _serviceProvider = serviceProvider;
     }
 
@@ -43,6 +46,7 @@ public class AgentOrchestrationService : IAgentOrchestrationService
         await _communicationHub.RegisterAgent(_chatAgent);
         await _communicationHub.RegisterAgent(_evolutionAgent);
         await _communicationHub.RegisterAgent(_toolAgent);
+        await _communicationHub.RegisterAgent(_projectManagementAgent); // ✨ First Evolved Agent
         
         // Register MCP tools
         var fileOps = _serviceProvider.GetService(typeof(FileOperationsMCP)) as FileOperationsMCP;

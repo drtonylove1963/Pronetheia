@@ -39,13 +39,15 @@ public enum AgentType
 {
     Chat,
     Evolution,
-    Tool
+    Tool,
+    ProjectManagement // ✨ First Evolved Agent Type
 }
 
 public enum AgentStatus
 {
-    Active,
     Idle,
+    Active, 
     Busy,
+    Processing,
     Error
 }
