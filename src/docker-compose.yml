@@ -5,7 +5,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD: PronetheiaDB2024!
+      SA_PASSWORD: ${SA_PASSWORD}
     ports:
       - "1433:1433"
     volumes:
@@ -22,9 +22,10 @@ services:
     depends_on:
       - sqlserver
     environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=PronetheiaDB;User=sa;Password=PronetheiaDB2024!;TrustServerCertificate=true;
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=PronetheiaDB;User=sa;Password=${SA_PASSWORD};TrustServerCertificate=true;
       - OpenRouter__ApiKey=${OPENROUTER_API_KEY}
-      - Jwt__Key=PronetheiaSecretKeyThatIsAtLeast32CharactersLong!@#$%
+      - Groq__ApiKey=${GROQ_API_KEY}
+      - Jwt__Key=${JWT_SECRET_KEY}
       - Jwt__Issuer=Pronetheia.Api
       - Jwt__Audience=Pronetheia.Client
       - ASPNETCORE_ENVIRONMENT=Development
