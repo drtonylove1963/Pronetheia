@@ -4,8 +4,8 @@ import { agentApi } from '../services/api'
 export interface Agent {
   id: string
   name: string
-  type: 'chat' | 'evolution' | 'tool'
-  status: 'active' | 'idle' | 'busy' | 'error'
+  type: 'chat' | 'evolution' | 'tool' | 'projectManagement'
+  status: 'active' | 'idle' | 'busy' | 'error' | 'processing'
   capabilities: string[]
   lastActivity: string
   isHealthy: boolean
@@ -63,10 +63,15 @@ export const useAgentStore = create<AgentState>((set, get) => ({
       // Transform response to match our interface
       const agents: Agent[] = response.data.map((status: any) => ({
         id: status.agentId,
-        name: status.agentId.split('-')[0] + 'Agent',
+        name: status.agentId.split('-').map((part: string) => 
+          part.charAt(0).toUpperCase() + part.slice(1)).join(''),
         type: status.agentId.includes('chat') ? 'chat' : 
-              status.agentId.includes('evolution') ? 'evolution' : 'tool',
-        status: status.status.toLowerCase(),
+              status.agentId.includes('evolution') ? 'evolution' : 
+              status.agentId.includes('project-management') ? 'projectManagement' : 'tool',
+        status: status.status === 0 ? 'idle' : 
+                status.status === 1 ? 'active' : 
+                status.status === 2 ? 'busy' : 
+                status.status === 3 ? 'processing' : 'error',
         capabilities: [],
         lastActivity: status.lastActivity,
         isHealthy: status.isHealthy,
@@ -159,10 +164,15 @@ export const useAgentStore = create<AgentState>((set, get) => ({
       const response = await agentApi.getAgentStatus()
       const agents: Agent[] = response.data.map((status: any) => ({
         id: status.agentId,
-        name: status.agentId.split('-')[0] + 'Agent',
+        name: status.agentId.split('-').map((part: string) => 
+          part.charAt(0).toUpperCase() + part.slice(1)).join(''),
         type: status.agentId.includes('chat') ? 'chat' : 
-              status.agentId.includes('evolution') ? 'evolution' : 'tool',
-        status: status.status.toLowerCase(),
+              status.agentId.includes('evolution') ? 'evolution' : 
+              status.agentId.includes('project-management') ? 'projectManagement' : 'tool',
+        status: status.status === 0 ? 'idle' : 
+                status.status === 1 ? 'active' : 
+                status.status === 2 ? 'busy' : 
+                status.status === 3 ? 'processing' : 'error',
         capabilities: [],
         lastActivity: status.lastActivity,
         isHealthy: status.isHealthy,

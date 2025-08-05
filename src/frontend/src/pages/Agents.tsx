@@ -132,6 +132,11 @@ const Agents = () => {
                     Orchestrates MCP tool execution and result processing
                   </div>
                 )}
+                {agent.type === 'projectManagement' && (
+                  <div className="text-xs text-muted-foreground">
+                    ✨ First Evolved Agent - Coordinates projects, optimizes workflows, and manages resources across the agent network
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -150,43 +155,50 @@ const Agents = () => {
           <div className="space-y-4">
             {/* Agent Communication Flow */}
             <div>
-              <h4 className="font-semibold mb-2">Agent Communication Flow</h4>
+              <h4 className="font-semibold mb-2">4-Agent System Architecture</h4>
               <div className="bg-gray-50 rounded-lg p-4">
-                <div className="flex items-center justify-center space-x-4">
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Top Row */}
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mb-2">
+                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mb-2 mx-auto">
                       💬
                     </div>
-                    <div className="text-xs">ChatAgent</div>
+                    <div className="text-xs font-medium">ChatAgent</div>
                     <div className="text-xs text-muted-foreground">User Interface</div>
                   </div>
                   
-                  <div className="flex items-center space-x-2">
-                    <div className="w-8 h-0.5 bg-gray-400"></div>
-                    <span className="text-xs">routes to</span>
-                    <div className="w-8 h-0.5 bg-gray-400"></div>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mb-2 mx-auto">
+                      📋
+                    </div>
+                    <div className="text-xs font-medium">ProjectManagementAgent</div>
+                    <div className="text-xs text-muted-foreground">✨ First Evolved</div>
                   </div>
                   
+                  {/* Bottom Row */}
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mb-2">
+                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mb-2 mx-auto">
                       🧬
                     </div>
-                    <div className="text-xs">EvolutionAgent</div>
-                    <div className="text-xs text-muted-foreground">Self-Analysis</div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    <div className="w-8 h-0.5 bg-gray-400"></div>
-                    <span className="text-xs">uses</span>
-                    <div className="w-8 h-0.5 bg-gray-400"></div>
+                    <div className="text-xs font-medium">EvolutionAgent</div>
+                    <div className="text-xs text-muted-foreground">Self-Evolution</div>
                   </div>
                   
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold mb-2">
+                    <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold mb-2 mx-auto">
                       🔧
                     </div>
-                    <div className="text-xs">ToolAgent</div>
+                    <div className="text-xs font-medium">ToolAgent</div>
                     <div className="text-xs text-muted-foreground">MCP Tools</div>
+                  </div>
+                </div>
+                
+                {/* Evolution Status */}
+                <div className="mt-4 text-center">
+                  <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs">
+                    <span>🎉</span>
+                    <span>Evolution Cycle 1 Complete</span>
+                    <span>🎉</span>
                   </div>
                 </div>
               </div>
